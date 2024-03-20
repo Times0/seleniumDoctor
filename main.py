@@ -6,12 +6,19 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 options = Options()
 # options.add_argument('--headless')
-options.add_argument('--no-sandbox')
+options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-driver = webdriver.Chrome(
+with webdriver.Chrome(
     service=Service(ChromeDriverManager().install()), options=options
-)
+) as driver:
+    driver.get("https://python.org")
+    print(driver.title)
 
-driver.get("https://python.org")
-print(driver.title)
-driver.close()
+
+### ___ Undetected Chromedriver ___ ###
+
+import undetected_chromedriver as uc
+
+with uc.Chrome() as driver:
+    driver.get("https://python.org")
+    print(driver.title)
