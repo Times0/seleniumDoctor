@@ -1,17 +1,19 @@
-# vim test.py
+import chromedriver_autoinstaller
+from pyvirtualdisplay import Display
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
-options = Options()
-options.add_argument("--headless")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-driver = webdriver.Chrome(
-    service=Service(ChromeDriverManager().install()), options=options
-)
+# Start a virtual display
+with Display(visible=0, size=[800, 600]) as display:
+    
+    # install chrome driver
+    chromedriver_autoinstaller.install()
 
-driver.get("https://python.org")
-print(driver.title)
-driver.close()
+    # Create a Selenium WebDriver with the virtual display
+    driver = webdriver.Chrome()
+
+    # Now you can use the WebDriver to interact with a web page
+    driver.get("https://www.example.com")
+    print(driver.title)
+  
+    # Close the WebDriver when done
+    driver.quit()
