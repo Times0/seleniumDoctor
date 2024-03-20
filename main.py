@@ -41,5 +41,5 @@ class Browser(object):
 
 
 # example usage
-b = Browser("chrome")
+b = Browser("firefox")
 b.driver.get("https://www.google.com")
